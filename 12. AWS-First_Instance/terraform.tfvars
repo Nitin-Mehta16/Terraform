@@ -8,8 +8,8 @@ key_name = "Terraform-SSH-Key"
 
 //sg.tf
 sg_name          = "Terraform-SG"
-sg_ingress_ports = [22, 443, 80]
+sg_ingress_ports = [22, 443, 80, 3000]
 
 //instance.tf
-ami           = "ami-0e35ddab05955cf57"
+# ami           = "ami-0e35ddab05955cf57"
 instance_type = "t2.micro"

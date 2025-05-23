@@ -1,6 +1,7 @@
 // Creating EC2 instance
 resource "aws_instance" "Terraform-Instance" {
-  ami             = var.ami
+  # ami             = var.ami
+  ami             = data.aws_ami.ami-resource.id
   instance_type   = var.instance_type
   security_groups = [aws_security_group.Terraform-SG.name]
   key_name        = aws_key_pair.Terraform-SSH-Key.key_name
@@ -46,7 +47,7 @@ resource "aws_instance" "Terraform-Instance" {
 
   provisioner "local-exec" {
     working_dir = "./"
-    command     = "echo ${self.public_ip} > ip.txt"
+    command     = "echo ${self.public_ip} >> ip.txt"
   }
 
   provisioner "local-exec" {
@@ -64,9 +65,26 @@ resource "aws_instance" "Terraform-Instance" {
   }
 
   provisioner "local-exec" {
-    when = destroy
+    when    = destroy
     command = "echo instance is destroying"
     # command = "exit 1"
+  }
+
+  provisioner "local-exec" {
+    on_failure = continue
+    when       = destroy
+    # command = "echo instance is destroying"
+    command = "exit 1"
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "echo Hello from remote-exec provisioner >> /home/ubuntu/terraform.txt",
+      "echo ${self.public_ip} >> /home/ubuntu/terraform.txt",
+    ]
+  }
+
+  provisioner "remote-exec" {
+    script = "${path.module}/remote_script.sh"
   }
 
 

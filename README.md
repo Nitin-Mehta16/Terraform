@@ -43,5 +43,31 @@ What will be added, changed, or destroyed to match .tf.
 ⦁	terraform taint  -->  it will replace the resource , means it will delete it and then recreate it. ***TERRAFORM DOES NOT RECOMMENT TAINT***
 ~ terraform taint aws_instance.Terraform-Instance
 
-⦁	
+⦁	terraform graph | dot -Tpdf > graph_pdf.pdf --> give graph of structure
+
+⦁	terraform graph | dot -Tsvg > graph_svg.svg --> give svg of structure
+
+***TERRAFORM WORKSPACE***
+⦁	When we use more than one  .tfvars like -:
+       ~ terraform plan --var-file dev-terraform.tfvars
+       ~ terraform plan --var-file prod-terraform.tfvars
+    to avoid change in same .tfstate file we create workflow 
+
+⦁	It provide individual workspace for each infrastructure. No need to write whole file from start.
+
+
+⦁	terraform workspace list  -> list of workspace 
+
+⦁	terraform workspace new  dev  -> create new workspace
+
+⦁	terraform workspace new prod
+
+⦁	terraform workspace select  prod  --> change workspace
+
+⦁	Terraform workspace delete prod  --> delete workspace 
+
+
+
+
+
 
