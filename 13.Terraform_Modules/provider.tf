@@ -8,11 +8,12 @@ terraform {
     }
   }
 
-  backend "s3" {
-    bucket = "bucket-name"
-    region = "ap-south-1"
-    key = "terraform_sate_file name"
-  }
+  # backend "s3" {
+  #   bucket = "terraform-testinggg"
+  #   region = "ap-south-1"
+  #   key = "terraform.tfstate"
+  #   dynamodb_table = "terraform-lock"
+  # }
 
 }
 

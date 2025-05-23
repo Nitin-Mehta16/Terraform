@@ -66,6 +66,11 @@ What will be added, changed, or destroyed to match .tf.
 
 ⦁	Terraform workspace delete prod  --> delete workspace 
 
+***MIGRATION OF .tfstate FILE***
+⦁	Comment backend tfstate  file code 
+⦁	terraform init -migrate-state --> copy remote tfstate to local storage
+
+
 
 
 
