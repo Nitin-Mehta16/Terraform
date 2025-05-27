@@ -1,7 +1,4 @@
 */.terraform/*
-*/.terraform.*
-id_rsa
-id_rsa.pub*/.terraform/*
 ***/.terraform.*/*
 */id_rsa/*
 */id_rsa.pub/*
