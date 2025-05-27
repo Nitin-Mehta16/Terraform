@@ -13,7 +13,8 @@ resource "aws_instance" "server" {
   #                                     #but if we add new instance in between or in middle it will first replace then add last one  eg. -> [3] +[1,2] => change name of 1 ->3 , 2->1, and will create new 2
   # for_each = toset(var.instance_name) # data type -> map or set(unnique values) 
 
-  instance_type = local.environment == "dev" ? "t2.micro" : "t2.small"
+  # instance_type = local.environment == "dev" ? "t2.micro" : "t2.small"
+  instance_type = var.instance_type
   #ami           = var.ami_id[var.region]
   ami = try(data.aws_ami.ubuntu.id, "ami-0e35ddab05955cf57")
 

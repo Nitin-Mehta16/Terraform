@@ -83,3 +83,9 @@ variable "project_name" {
   type        = string
   default     = "prject-name"
 }
+
+variable "instance_type" {
+  description = "type of the instance"
+  type        = string
+  default     = "t2.micro"
+}

@@ -53,3 +53,8 @@ variable "project_name" {
   description = "name of the project"
   type        = string
 }
+
+variable "instance_type" {
+  description = "type of the instance"
+  type        = string
+}

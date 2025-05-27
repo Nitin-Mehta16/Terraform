@@ -8,4 +8,5 @@ module "create_ec2" {
   project_folder      = var.project_folder
   project_destination = var.project_destination
   project_name        = var.project_name
+  instance_type       = var.instance_type
 }
