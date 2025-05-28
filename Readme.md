@@ -42,7 +42,9 @@
 
 ⦁	terraform fmt -->correct indendation
 
-⦁	terraform taint  -->  it will replace the resource , means it will delete it and then recreate it. ***TERRAFORM DOES NOT RECOMMENT TAINT***
+⦁	terraform taint  -->  it will replace the resource , means it will delete it and then recreate it.  
+***TERRAFORM DOES NOT RECOMMENT TAINT***
+
 ~ terraform taint aws_instance.Terraform-Instance
 
 ⦁	terraform graph | dot -Tpdf > graph_pdf.pdf --> give graph of structure
@@ -50,6 +52,7 @@
 ⦁	terraform graph | dot -Tsvg > graph_svg.svg --> give svg of structure
 
 ***TERRAFORM WORKSPACE***
+
 ⦁	When we use more than one  .tfvars like -:
 
        ~ terraform plan --var-file dev-terraform.tfvars
@@ -72,14 +75,17 @@
 ⦁	Terraform workspace delete prod  --> delete workspace 
 
 ***Terraform Backend with state locking using Dynamo DB***
+
 ⦁	Add backend block in terraform block with bucket name (bucket), region(region), file to backup(key), dynamo table (dynamodb_table ).
 
 ***MIGRATION OF .tfstate FILE***
+
 ⦁	Comment backend tfstate  file code 
 
 ⦁	terraform init -migrate-state --> copy remote tfstate to local storage
 
 ***Realtime Problem Face in Terraform***
+
 ⦁	1st -> Created different workspaces |  Problem --> Make changes in terraform.tfvars for every workspace and sometime forget ot change workspace.
 
 ⦁	2nd -> Created different .tfvars file + different workspaces | Problem --> Forget to add --var-file  orchange workspace.
