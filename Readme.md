@@ -51,8 +51,11 @@
 
 ***TERRAFORM WORKSPACE***
 ⦁	When we use more than one  .tfvars like -:
+
        ~ terraform plan --var-file dev-terraform.tfvars
-       ~ terraform plan --var-file prod-terraform.tfvars
+
+       ~ terraform plan --var-file prod-terraform.
+       
     to avoid change in same .tfstate file we create workflow 
 
 ⦁	It provide individual workspace for each infrastructure. No need to write whole file from start.
@@ -73,11 +76,14 @@
 
 ***MIGRATION OF .tfstate FILE***
 ⦁	Comment backend tfstate  file code 
+
 ⦁	terraform init -migrate-state --> copy remote tfstate to local storage
 
 ***Realtime Problem Face in Terraform***
 ⦁	1st -> Created different workspaces |  Problem --> Make changes in terraform.tfvars for every workspace and sometime forget ot change workspace.
+
 ⦁	2nd -> Created different .tfvars file + different workspaces | Problem --> Forget to add --var-file  orchange workspace.
+
 ⦁	3rd -> Creted different folder for every environment,no need of workspace.  | Problem -->  Duplication of Code 
 
 ⦁***4th Terragrunt***
