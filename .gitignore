@@ -5,6 +5,7 @@ id_rsa.pub*/.terraform/*
 ***/.terraform.*/*
 */id_rsa/*
 
+
 */.terraform/*
 ***/.terraform.*/*
 */id_rsa/*

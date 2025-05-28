@@ -30,3 +30,4 @@ ports = [{
 deploy_script       = "./deploy.sh"
 project_folder      = "../src/"
 project_destination = "/var/www/html/"
+instance_type       = "t2.micro"
