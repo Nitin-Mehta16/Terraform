@@ -34,7 +34,7 @@
 
 ⦁	 terraform refresh is only needed to update state if resources have changed outside of Terraform (like someone editing an EC2 instance manually in AWS).
 
-*** Running terraform plan after terraform refresh can help you see differences caused by other developers or changes outside Terraform, without actually applying anything yet. ***
+##### Running terraform plan after terraform refresh can help you see differences caused by other developers or changes outside Terraform, without actually applying anything yet. 
 
 ⦁	terraform output owner_of_the_github--> print output
 
@@ -43,7 +43,7 @@
 ⦁	terraform fmt -->correct indendation
 
 ⦁	terraform taint  -->  it will replace the resource , means it will delete it and then recreate it.  
-***TERRAFORM DOES NOT RECOMMENT TAINT***
+### TERRAFORM DOES NOT RECOMMENT TAINT
 
 ~ terraform taint aws_instance.Terraform-Instance
 
@@ -51,7 +51,7 @@
 
 ⦁	terraform graph | dot -Tsvg > graph_svg.svg --> give svg of structure
 
-***TERRAFORM WORKSPACE***
+### TERRAFORM WORKSPACE
 
 ⦁	When we use more than one  .tfvars like -:
 
@@ -74,17 +74,17 @@
 
 ⦁	Terraform workspace delete prod  --> delete workspace 
 
-***Terraform Backend with state locking using Dynamo DB***
+### Terraform Backend with state locking using Dynamo DB
 
 ⦁	Add backend block in terraform block with bucket name (bucket), region(region), file to backup(key), dynamo table (dynamodb_table ).
 
-***MIGRATION OF .tfstate FILE***
+### MIGRATION OF .tfstate FILE
 
 ⦁	Comment backend tfstate  file code 
 
 ⦁	terraform init -migrate-state --> copy remote tfstate to local storage
 
-***Realtime Problem Face in Terraform***
+### Realtime Problem Face in Terraform
 
 ⦁	1st -> Created different workspaces |  Problem --> Make changes in terraform.tfvars for every workspace and sometime forget ot change workspace.
 
