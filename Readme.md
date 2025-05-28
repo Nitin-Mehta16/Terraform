@@ -1,115 +1,147 @@
-# Terraform Documentation 
 
-⦁	.tf files (configuration) --> This is your desired state — what you want your infrastructure to look like.
-⦁	 .tfstate file (current state) --> This is Terraform’s knowledge of what is currently deployed. 
+# 📘 Terraform Documentation
 
+---
 
+- `.tf` files (configuration) → This is your desired state — what you want your infrastructure to look like.  
+- `.tfstate` file (current state) → This is Terraform’s knowledge of what is currently deployed.  
 
-⦁	terraform providers 
+---
 
-⦁	terraform init
+### 🔧 Terraform Core Commands
 
-⦁	terraform validate
+- `terraform providers`  
+- `terraform init`  
+- `terraform validate`  
+- `terraform plan` → compare `.tfstate` with resources  
 
-⦁	terraform plan -> compare .tfstate with resources
+---
 
-🔄 What happens during terraform plan:
-1. Load the current state from .tfstate.
-2. Compare the resources defined in your .tf files with the state.
-3. Query the real infrastructure (cloud provider) to ensure the state is accurate.
+### 🔄 What happens during `terraform plan`
+
+1. Load the current state from `.tfstate`.  
+2. Compare the resources defined in your `.tf` files with the state.  
+3. Query the real infrastructure (cloud provider) to ensure the state is accurate.  
 4. Show you the delta:
-    What will be added(+), changed(-+), destroyed(-), modify(~) to match .tf.
+    - What will be added `+`,  
+    - Changed `-+`,  
+    - Destroyed `-`,  
+    - Modified `~` to match `.tf`.
 
-✅ It does not apply any changes, only shows what would happen if you run apply.
+✅ It does **not apply** any changes, only shows what would happen if you run `apply`.
 
+---
 
-⦁	terraform apply --auto-approve
+### 🛠️ Other Terraform Commands
 
-⦁	terraform destroy --target github_repository.Second_repo_created_by_terraform
+- `terraform apply --auto-approve`  
+- `terraform destroy --target github_repository.Second_repo_created_by_terraform`  
+- `terraform destroy`  
 
-⦁	terrfarom destroy  
+---
 
+### 🔁 Refresh Terraform State
 
-⦁	terraform refresh --> update Terraform's state file with the real-world state of infrastructure.
+- `terraform refresh` → update Terraform's state file with the real-world state of infrastructure.  
+- `terraform refresh` is only needed if resources have changed **outside of Terraform** (like someone editing an EC2 instance manually in AWS).
 
-⦁	 terraform refresh is only needed to update state if resources have changed outside of Terraform (like someone editing an EC2 instance manually in AWS).
+> ##### 🔍 Running `terraform plan` after `terraform refresh`  
+> Helps you see differences caused by other developers or manual changes without actually applying anything yet.
 
-##### Running terraform plan after terraform refresh can help you see differences caused by other developers or changes outside Terraform, without actually applying anything yet. 
+---
 
-⦁	terraform output owner_of_the_github--> print output
+### 📤 Outputs & Console
 
-⦁	terraform console-> console of pwd
+- `terraform output owner_of_the_github` → print output  
+- `terraform console` → console of pwd  
+- `terraform fmt` → correct indentation  
 
-⦁	terraform fmt -->correct indendation
+---
 
-⦁	terraform taint  -->  it will replace the resource , means it will delete it and then recreate it.  
-### TERRAFORM DOES NOT RECOMMENT TAINT
+### ⚠️ Terraform Taint
 
-~ terraform taint aws_instance.Terraform-Instance
+- `terraform taint` → replaces the resource (delete + recreate)  
 
-⦁	terraform graph | dot -Tpdf > graph_pdf.pdf --> give graph of structure
+> ### ⚠️ TERRAFORM DOES NOT RECOMMEND TAINT
 
-⦁	terraform graph | dot -Tsvg > graph_svg.svg --> give svg of structure
+```bash
+terraform taint aws_instance.Terraform-Instance
+```
 
-### TERRAFORM WORKSPACE
+---
 
-⦁	When we use more than one  .tfvars like -:
+### 📈 Terraform Graph
 
-       ~ terraform plan --var-file dev-terraform.tfvars
+```bash
+terraform graph | dot -Tpdf > graph_pdf.pdf   # give PDF graph of structure
+terraform graph | dot -Tsvg > graph_svg.svg   # give SVG graph of structure
+```
 
-       ~ terraform plan --var-file prod-terraform.
-       
-    to avoid change in same .tfstate file we create workflow 
+---
 
-⦁	It provide individual workspace for each infrastructure. No need to write whole file from start.
+## 🧱 TERRAFORM WORKSPACE
 
+- When we use more than one `.tfvars` like:
 
-⦁	terraform workspace list  -> list of workspace 
+```bash
+terraform plan --var-file=dev-terraform.tfvars
+terraform plan --var-file=prod-terraform.tfvars
+```
 
-⦁	terraform workspace new  dev  -> create new workspace
+- To avoid changes in the same `.tfstate` file, we create workflows.  
+- It provides **individual workspaces** for each infrastructure.  
+- No need to write the whole file from scratch.
 
-⦁	terraform workspace new prod
+### Workspace Commands
 
-⦁	terraform workspace select  prod  --> change workspace
+- `terraform workspace list` → list of workspaces  
+- `terraform workspace new dev` → create new workspace  
+- `terraform workspace new prod`  
+- `terraform workspace select prod` → change workspace  
+- `terraform workspace delete prod` → delete workspace  
 
-⦁	Terraform workspace delete prod  --> delete workspace 
+---
 
-### Terraform Backend with state locking using Dynamo DB
+## ☁️ Terraform Backend with State Locking (DynamoDB)
 
-⦁	Add backend block in terraform block with bucket name (bucket), region(region), file to backup(key), dynamo table (dynamodb_table ).
+- Add backend block in `terraform` block with:
+  - `bucket` (name),
+  - `region`,
+  - `key` (file path),
+  - `dynamodb_table` (lock management).
 
-### MIGRATION OF .tfstate FILE
+---
 
-⦁	Comment backend tfstate  file code 
+## 🔄 MIGRATION OF `.tfstate` FILE
 
-⦁	terraform init -migrate-state --> copy remote tfstate to local storage
+- Comment backend `.tfstate` file code  
+- Run:
 
-### Realtime Problem Face in Terraform
+```bash
+terraform init -migrate-state   # copy remote tfstate to local storage
+```
 
-⦁	1st -> Created different workspaces |  Problem --> Make changes in terraform.tfvars for every workspace and sometime forget ot change workspace.
+---
 
-⦁	2nd -> Created different .tfvars file + different workspaces | Problem --> Forget to add --var-file  orchange workspace.
+## 🐛 Realtime Problems Faced in Terraform
 
-⦁	3rd -> Creted different folder for every environment,no need of workspace.  | Problem -->  Duplication of Code 
+1. **Created different workspaces**  
+   **Problem:** Need to make changes in `terraform.tfvars` for every workspace, and sometimes forget to switch workspace.
 
-⦁***4th Terragrunt***
-  - terragrunt init 
-  - terragrunt plan
-  - terraggrunt run-all init
-  - terraggrunt run-all plan
-  - terragrunt run-all apply 
-  - terragrunt run-all destroy
+2. **Created different `.tfvars` file + different workspaces**  
+   **Problem:** Forget to add `--var-file` or change workspace.
 
+3. **Created different folder for every environment, no need for workspace**  
+   **Problem:** Duplication of code.
 
+4. **Terragrunt**
+   ```bash
+   terragrunt init  
+   terragrunt plan  
+   terragrunt run-all init  
+   terragrunt run-all plan  
+   terragrunt run-all apply  
+   terragrunt run-all destroy  
+   ```
 
-
-
-
-
-
-
-
-
-
-
-
+---
