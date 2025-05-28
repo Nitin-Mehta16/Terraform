@@ -1,3 +1,5 @@
+# Terraform Documentation 
+
 ⦁	.tf files (configuration) --> This is your desired state — what you want your infrastructure to look like.
 ⦁	 .tfstate file (current state) --> This is Terraform’s knowledge of what is currently deployed. 
 
